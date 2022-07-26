@@ -27,7 +27,8 @@ class BestBooks extends React.Component {
       //   }
       // ]
     }
-    this.server = process.env.SERVER
+    // this.server = process.env.SERVER
+    this.server = 'https://can-of-books-backend123.herokuapp.com'
   }
 
 componentDidMount () {
