@@ -3,16 +3,34 @@ import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
 import About from './About';
+import BookFormModal from './BookFormModal';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
-
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal:false,
+      books:[]
+    }
+  }
+
+  handleAddButtonClick = (e) => {
+    e.preventDefault();
+    this.setState({showModal:true});
+  }
+
+  closeModal = () => {
+    this.setState({showModal:false});
+  }
+
   render() {
     return (
       <>
@@ -21,7 +39,7 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks />}
+              element={<BestBooks books={this.state.books} />}
             >
             </Route>
             <Route 
@@ -29,8 +47,9 @@ class App extends React.Component {
               element={<About />}
             >
             </Route>
-            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
           </Routes>
+          <Button id="addButton" onClick={this.handleAddButtonClick}>Add a book to the library!</Button>
+          <BookFormModal showModal={this.state.showModal} closeModal={this.closeModal} />
           <Footer />
         </Router>
       </>

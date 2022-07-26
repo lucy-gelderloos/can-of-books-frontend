@@ -9,26 +9,10 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: []
-      // books: [
-      //   {
-      //     title:'Where the Sidewalk Ends',
-      //     description:'Poetry by Shel Silverstein',
-      //     status:'Read'
-      //   },
-      //   {
-      //     title:`Oh, the Places You'll go`,
-      //     description:`Children's book by Dr. Seuss`,
-      //     status:'Read'
-      //   },
-      //   {
-      //     title:'Infinite Jest',
-      //     description:'too long',
-      //     status:'tried to read'
-      //   }
-      // ]
     }
-    // this.server = process.env.SERVER
+    // this.server = process.env.REACT_APP_SERVER
     this.server = 'https://can-of-books-backend123.herokuapp.com'
+    // this.server = 'http://localhost:3002'
   }
 
 componentDidMount () {
@@ -51,8 +35,6 @@ getBooks();
 }
 
   render() {
-
-    /* TODO: render all the books in a Carousel */
 
     return (
       <>
