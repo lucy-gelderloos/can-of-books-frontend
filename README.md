@@ -18,7 +18,16 @@
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Estimates
-<!-- See below -->
+
+Name of feature: Lab 11, Setup
+
+Estimate of time needed to complete: 1h
+
+Start time: 3:00 PM
+
+Finish time: 4:15 PM
+
+Actual time needed to complete: 1.25h
 
 ## Credit and Collaborations
 
@@ -40,3 +49,9 @@
   - *What will your team do if one person is pulling all the weight while the other person is not contributing?* First try talking to the other person; if they don't respond, work with Jacob to figure out how to proceed
   - *What will your team do if one person is taking over the project and not letting the other member contribute?* Same as above - try to talk to them, then work with Jacob
   - *How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?* Be willing to share knowledge & collaborate
+
+## Team Notes
+
+Deployed front end: https://dashboard.heroku.com/apps/can-of-books-front
+
+Deployed back end: https://can-of-books-backend123.herokuapp.com/
