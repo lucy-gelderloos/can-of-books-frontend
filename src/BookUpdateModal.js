@@ -6,24 +6,23 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-class BookFormModal extends React.Component {
+class BookUpdateModal extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         title:'',
         description:'',
-        status:true
+        status:false,
+        showModal:this.props.showModal
       };
     this.server = process.env.REACT_APP_SERVER
-    this.showModal = this.props.showModal;
-    this.closeModal = this.props.closeModal;
     this.books = this.props.books;
+    this.thisBookID = this.props.thisBookID;
     }
 
-    handleTitleChange(e, testParam){
+    handleTitleChange(e){
         this.setState({title: e.target.value });
-        testParam = 'I am a test parameter';
-        console.log('handleTitleChange testParam',testParam);
+        console.log('handleTitleChange this.state',this.state)
     }
 
     handleDescChange(e){
@@ -34,10 +33,15 @@ class BookFormModal extends React.Component {
         this.setState({status: e.target.value});
     }
 
+    defaultValues = (id) => {
+        let thisBook = this.books.filter(el => el._id === id);
+        this.setState({title:thisBook.title,description:thisBook.description,status:thisBook.status});
+    }
+
     handleSubmit = (event) => {
         // needs to be fat arrow function so state will work????
         event.preventDefault();
-        this.closeModal();
+        this.props.closeModal();
 
         let newBook = {
         title: this.state.title,
@@ -45,30 +49,36 @@ class BookFormModal extends React.Component {
         status: this.state.status
         }
 
-        axios.post(`${this.server}/books`, newBook)
+        axios.put(`${this.server}/books/${this.props.thisBook}`, newBook)
           .then(response => {
             console.log('post response.data',response.data);
         });
     }
 
+    closeModal = () => {
+        console.log('modal has closed')
+        this.setState({showModal:false});
+      }
+
     render() {
+        console.log('UpdateModal render this.state.showUpdateModal',this.state.showModal);
         return (
-            <Modal show={this.props.showModal} onHide={this.props.closeModal}>
-                <Modal.Header closeButton>Add a book</Modal.Header>
+            <Modal show={this.state.showModal} onHide={this.closeModal}>
+                <Modal.Header closeButton></Modal.Header>
                 <Form>
                 <Form.Group>
-                  <Form.Label>Add a new book</Form.Label>
-                  <Form.Control type="text" name="title" placeholder="Title" onChange={this.handleTitleChange.bind(this)} />
-                  <Form.Control type="text" name="description" placeholder="Description" onChange={this.handleDescChange.bind(this)} />
+                  <Form.Label>Update a book</Form.Label>
+                  <Form.Control type="text" name="title" defaultValue={this.state.title} onChange={this.handleTitleChange.bind(this)} />
+                  <Form.Control type="text" name="description" defaultValue={this.state.description} onChange={this.handleDescChange.bind(this)} />
                   <Form.Select name="status" onChange={this.handleStatusChange.bind(this)} >      
                     <option value="true">true</option>
                     <option value="false">false</option>
                     </Form.Select>
-                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>Add</Button>
+                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>Update</Button>
                 </Form.Group>
               </Form>
             </Modal>
         )}
 }
 
-export default BookFormModal;
+export default BookUpdateModal;

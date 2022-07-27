@@ -11,25 +11,37 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+// import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal:false,
+      showAddModal:false,
+      showUpdateModal:false,
       books:[]
     }
   }
 
   handleAddButtonClick = (e) => {
     e.preventDefault();
-    this.setState({showModal:true});
+    this.setState({showAddModal:true});
   }
 
+  // handleUpdateButtonClick = (e) => {
+  //   e.preventDefault();
+  //   console.log('update button was clicked');
+  //   // show the modal
+  //   this.setState({showUpdateModal:true,thisBook:e.target.value});
+  //   console.log('thisBook',this.state.thisBook);
+  //   // send the id of the clicked item down to BookUpdateModal
+  // }
+
   closeModal = () => {
-    this.setState({showModal:false});
+    this.setState({showAddModal:false,showUpdateModal:false});
   }
+
 
   render() {
     return (
@@ -39,7 +51,7 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks update={this.state.update} books={this.state.books} />}
+              element={<BestBooks books={this.state.books} showUpdateModal={this.state.showUpdateModal}/>}
             >
             </Route>
             <Route 
@@ -49,7 +61,7 @@ class App extends React.Component {
             </Route>
           </Routes>
           <Button id="addButton" onClick={this.handleAddButtonClick}>Add a book to the library!</Button>
-          <BookFormModal showModal={this.state.showModal} closeModal={this.closeModal} />
+          <BookFormModal showModal={this.state.showAddModal} closeModal={this.closeModal} />
           <Footer />
         </Router>
       </>
