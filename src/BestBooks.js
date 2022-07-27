@@ -49,7 +49,23 @@ deleteBook = (e) => {
     console.log('error in deleteBook',err);
     this.setState({error:`Error! (${err.code}: ${err.message})`});
 })
+}
 
+handleAddSubmit = (event) => {
+  // needs to be fat arrow function so state will work????
+  event.preventDefault();
+  this.props.closeModal();
+
+  let newBook = {
+  title: this.state.title,
+  description: this.state.description,
+  status: this.state.status
+  }
+
+  axios.post(`${this.server}/books`, newBook)
+    .then(response => {
+      console.log('post response.data',response.data);
+  });
 }
 
   render() {

@@ -39,7 +39,7 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks books={this.state.books} />}
+              element={<BestBooks update={this.state.update} books={this.state.books} />}
             >
             </Route>
             <Route 
