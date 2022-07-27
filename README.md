@@ -2,6 +2,7 @@
 
 **Author**: Lucy Gelderloos, Trevor Stephens
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.1
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -15,6 +16,7 @@
 ## Change Log
 
 7/25/2022 6:30 PM - App can retrieve & display books from server
+7/26/2022 5:30 PM - App can add books & delete books
 
 ## Estimates
 
@@ -47,6 +49,26 @@ Start time: 4:00 PM
 Finish time: 6:30 PM
 
 Actual time needed to complete: 2.5h
+
+Name of feature: Lab 12, Create
+
+Estimate of time needed to complete: 1h
+
+Start time: 1:00 PM
+
+Finish time: 2:00 PM
+
+Actual time needed to complete: 1h
+
+Name of feature: Lab 12, Delete
+
+Estimate of time needed to complete: 2h
+
+Start time: 2:00 PM
+
+Finish time: 5:30 PM
+
+Actual time needed to complete: 2.5h, with breaks to work on setup
 
 ## Credit and Collaborations
 
