@@ -16,8 +16,8 @@ class BookUpdateModal extends React.Component {
         showModal:this.props.showModal
       };
     this.server = process.env.REACT_APP_SERVER
-    this.books = this.props.books;
-    this.thisBookID = this.props.thisBookID;
+    // this.books = this.props.books;
+    // this.thisBookID = this.props.thisBookID;
     }
 
     handleTitleChange(e){
@@ -31,11 +31,6 @@ class BookUpdateModal extends React.Component {
 
     handleStatusChange(e){
         this.setState({status: e.target.value});
-    }
-
-    defaultValues = (id) => {
-        let thisBook = this.books.filter(el => el._id === id);
-        this.setState({title:thisBook.title,description:thisBook.description,status:thisBook.status});
     }
 
     handleSubmit = (event) => {
@@ -61,15 +56,15 @@ class BookUpdateModal extends React.Component {
       }
 
     render() {
-        console.log('UpdateModal render this.state.showUpdateModal',this.state.showModal);
+        console.log('UpdateModal render this.props.selectedBook[0]',this.props.selectedBook[0]._id);
         return (
             <Modal show={this.state.showModal} onHide={this.closeModal}>
                 <Modal.Header closeButton></Modal.Header>
                 <Form>
                 <Form.Group>
                   <Form.Label>Update a book</Form.Label>
-                  <Form.Control type="text" name="title" defaultValue={this.state.title} onChange={this.handleTitleChange.bind(this)} />
-                  <Form.Control type="text" name="description" defaultValue={this.state.description} onChange={this.handleDescChange.bind(this)} />
+                  <Form.Control type="text" name="title" defaultValue={this.props.selectedBook[0].title} onChange={this.handleTitleChange.bind(this)} />
+                  <Form.Control type="text" name="description" defaultValue={this.props.selectedBook[0].description} onChange={this.handleDescChange.bind(this)} />
                   <Form.Select name="status" onChange={this.handleStatusChange.bind(this)} >      
                     <option value="true">true</option>
                     <option value="false">false</option>

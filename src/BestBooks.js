@@ -14,7 +14,8 @@ class BestBooks extends React.Component {
       books: [],
       error:'',
       showUpdateModal:false,
-      thisBookID:''
+      selectedBook:[],
+      buttonClicked:0
     }
     // this.server = process.env.REACT_APP_SERVER
     this.server = 'https://can-of-books-backend123.herokuapp.com'
@@ -72,10 +73,10 @@ deleteBook = (e) => {
 
 handleUpdateButtonClick = (e) => {
   e.preventDefault();
-  // show the modal
-  this.setState({showUpdateModal:true,thisBookID:e.target.id});
-  console.log('handleUpdateButtonClick this.state.showUpdateModal',this.state.showUpdateModal);
-  // send the id of the clicked item down to BookUpdateModal
+  this.setState({buttonClicked: this.state.buttonClicked + 1})
+  this.setState({showUpdateModal:true});
+  this.setState({selectedBook:this.state.books.filter(el => el._id === e.target.id)});
+  console.log('handleUpdateButtonClick this.state.showUpdateModal, this.state.selectedBook',this.state.showUpdateModal, this.state.selectedBook);
 }
 
 
@@ -104,7 +105,7 @@ handleUpdateButtonClick = (e) => {
               </Carousel.Item>
             )}
           </Carousel>
-          <BookUpdateModal showModal={this.state.showUpdateModal} books={this.state.books} thisBookID={this.state.thisBookID}/>
+          <BookUpdateModal key={this.state.buttonClicked} showModal={this.state.showUpdateModal} selectedBook={this.state.selectedBook}/>
           </div>
 
         ) : (
