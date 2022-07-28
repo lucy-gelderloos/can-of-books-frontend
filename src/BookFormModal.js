@@ -35,7 +35,6 @@ class BookFormModal extends React.Component {
     }
 
     handleSubmit = (event) => {
-        // needs to be fat arrow function so state will work????
         event.preventDefault();
         this.closeModal();
 

@@ -35,7 +35,6 @@ class BookUpdateModal extends React.Component {
     }
 
     handleSubmit = (event) => {
-        // needs to be fat arrow function so state will work????
         event.preventDefault();
         this.closeModal();
         let title;
@@ -57,13 +56,15 @@ class BookUpdateModal extends React.Component {
 
         let newBook = {
         title: title,
-        description: description,
+        description: description
         }
 
         axios.put(`${this.server}/books/${this.props.selectedBook[0]._id}`, newBook)
           .then(response => {
             console.log('post response.data',response.data);
         });
+
+        // this.props.getBooks();
     }
 
     closeModal = () => {

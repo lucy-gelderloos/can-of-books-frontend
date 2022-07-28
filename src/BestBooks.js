@@ -61,7 +61,6 @@ handleUpdateButtonClick = (e) => {
   this.setState({buttonClicked: this.state.buttonClicked + 1})
   this.setState({showUpdateModal:true});
   this.setState({selectedBook:this.state.books.filter(el => el._id === e.target.id)});
-  console.log('handleUpdateButtonClick this.state.showUpdateModal, this.state.selectedBook',this.state.showUpdateModal, this.state.selectedBook);
 }
 
   render() {
@@ -81,7 +80,7 @@ handleUpdateButtonClick = (e) => {
               </Carousel.Item>
             )}
           </Carousel>
-          <BookUpdateModal key={this.state.buttonClicked} showModal={this.state.showUpdateModal} selectedBook={this.state.selectedBook}/>
+          <BookUpdateModal key={this.state.buttonClicked} showModal={this.state.showUpdateModal} getBooks={this.getBooks} selectedBook={this.state.selectedBook}/>
           </div>
 
         ) : (

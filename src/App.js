@@ -19,7 +19,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       showAddModal:false,
-      showUpdateModal:false,
       books:[]
     }
   }
@@ -29,17 +28,8 @@ class App extends React.Component {
     this.setState({showAddModal:true});
   }
 
-  // handleUpdateButtonClick = (e) => {
-  //   e.preventDefault();
-  //   console.log('update button was clicked');
-  //   // show the modal
-  //   this.setState({showUpdateModal:true,thisBook:e.target.value});
-  //   console.log('thisBook',this.state.thisBook);
-  //   // send the id of the clicked item down to BookUpdateModal
-  // }
-
   closeModal = () => {
-    this.setState({showAddModal:false,showUpdateModal:false});
+    this.setState({showAddModal:false});
   }
 
 
@@ -51,7 +41,7 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks books={this.state.books} showUpdateModal={this.state.showUpdateModal}/>}
+              element={<BestBooks books={this.state.books} />}
             >
             </Route>
             <Route 
