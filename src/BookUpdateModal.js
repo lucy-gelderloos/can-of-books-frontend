@@ -15,7 +15,8 @@ class BookUpdateModal extends React.Component {
         status:false,
         showModal:this.props.showModal
       };
-    this.server = process.env.REACT_APP_SERVER
+    this.server = process.env.REACT_APP_SERVER;
+    this.selectedBook = this.props.selectedBook;
     // this.books = this.props.books;
     // this.thisBookID = this.props.thisBookID;
     }
@@ -36,15 +37,30 @@ class BookUpdateModal extends React.Component {
     handleSubmit = (event) => {
         // needs to be fat arrow function so state will work????
         event.preventDefault();
-        this.props.closeModal();
+        this.closeModal();
+        let title;
+        let description;
 
-        let newBook = {
-        title: this.state.title,
-        description: this.state.description,
-        status: this.state.status
+        if(this.state.title){
+            title = this.state.title;
+        }
+        else{
+            title = this.props.selectedBook[0].title;
         }
 
-        axios.put(`${this.server}/books/${this.props.thisBook}`, newBook)
+        if(this.state.description){
+            description = this.state.description;
+        }
+        else{
+            description = this.props.selectedBook[0].description;
+        }
+
+        let newBook = {
+        title: title,
+        description: description,
+        }
+
+        axios.put(`${this.server}/books/${this.props.selectedBook[0]._id}`, newBook)
           .then(response => {
             console.log('post response.data',response.data);
         });
@@ -56,8 +72,10 @@ class BookUpdateModal extends React.Component {
       }
 
     render() {
-        console.log('UpdateModal render this.props.selectedBook[0]',this.props.selectedBook[0]._id);
+        // console.log('UpdateModal render this.props.selectedBook[0]',this.props.selectedBook[0]._id);
         return (
+            <div>
+            {this.selectedBook.length ? (
             <Modal show={this.state.showModal} onHide={this.closeModal}>
                 <Modal.Header closeButton></Modal.Header>
                 <Form>
@@ -72,7 +90,9 @@ class BookUpdateModal extends React.Component {
                     <Button variant="primary" type="submit" onClick={this.handleSubmit}>Update</Button>
                 </Form.Group>
               </Form>
-            </Modal>
+            </Modal>) : ''
+            }
+            </div>
         )}
 }
 

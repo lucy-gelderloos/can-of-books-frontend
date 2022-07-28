@@ -56,21 +56,6 @@ deleteBook = (e) => {
   })
 }
 
-// updateBook = (id,title,description,status) => {
-//   this.closeModal();
-
-//   let newBook = {
-//   title: this.state.title,
-//   description: this.state.description,
-//   status: this.state.status
-//   }
-
-//   axios.post(`${this.server}/books`, newBook)
-//     .then(response => {
-//       console.log('post response.data',response.data);
-//   });
-// }
-
 handleUpdateButtonClick = (e) => {
   e.preventDefault();
   this.setState({buttonClicked: this.state.buttonClicked + 1})
@@ -78,15 +63,6 @@ handleUpdateButtonClick = (e) => {
   this.setState({selectedBook:this.state.books.filter(el => el._id === e.target.id)});
   console.log('handleUpdateButtonClick this.state.showUpdateModal, this.state.selectedBook',this.state.showUpdateModal, this.state.selectedBook);
 }
-
-
-// so the handle update function should filter this.state.books on the provided ID, then pull up the form with the default values set to the title, description, & status of the targeted book, then send the updated info as a put request & separately(?) update this.state.books with the new info
-
-// handleUpdateButtonClick = (e) => {
-//   e.preventDefault();
-//   let thisBookID = this.state.books.filter(el => el._id === e.target.id);
-//   console.log('thisBookID',thisBookID);
-// }
 
   render() {
     return (
