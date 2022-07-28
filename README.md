@@ -17,6 +17,7 @@
 
 7/25/2022 6:30 PM - App can retrieve & display books from server
 7/26/2022 5:30 PM - App can add books & delete books
+7/27/2022 5:30 PM - User can update information for existing books
 
 ## Estimates
 
@@ -69,6 +70,16 @@ Start time: 2:00 PM
 Finish time: 5:30 PM
 
 Actual time needed to complete: 2.5h, with breaks to work on setup
+
+Name of feature: Lab 13, Update
+
+Estimate of time needed to complete: 3h
+
+Start time: 1:00 PM
+
+Finish time: 5:30 PM
+
+Actual time needed to complete: 3h, with breaks
 
 ## Credit and Collaborations
 

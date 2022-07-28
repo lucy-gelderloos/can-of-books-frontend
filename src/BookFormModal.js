@@ -20,9 +20,10 @@ class BookFormModal extends React.Component {
     this.books = this.props.books;
     }
 
-    handleTitleChange(e){
+    handleTitleChange(e, testParam){
         this.setState({title: e.target.value });
-        console.log('handleTitleChange this.state',this.state)
+        testParam = 'I am a test parameter';
+        console.log('handleTitleChange testParam',testParam);
     }
 
     handleDescChange(e){
@@ -34,9 +35,8 @@ class BookFormModal extends React.Component {
     }
 
     handleSubmit = (event) => {
-        // needs to be fat arrow function so state will work????
         event.preventDefault();
-        this.props.closeModal();
+        this.closeModal();
 
         let newBook = {
         title: this.state.title,
@@ -53,7 +53,7 @@ class BookFormModal extends React.Component {
     render() {
         return (
             <Modal show={this.props.showModal} onHide={this.props.closeModal}>
-                <Modal.Header closeButton></Modal.Header>
+                <Modal.Header closeButton>Add a book</Modal.Header>
                 <Form>
                 <Form.Group>
                   <Form.Label>Add a new book</Form.Label>

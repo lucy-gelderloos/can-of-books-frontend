@@ -5,12 +5,17 @@ import './App.css'
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 
+import BookUpdateModal from './BookUpdateModal';
+
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      error:''
+      error:'',
+      showUpdateModal:false,
+      selectedBook:[],
+      buttonClicked:0
     }
     // this.server = process.env.REACT_APP_SERVER
     this.server = 'https://can-of-books-backend123.herokuapp.com'
@@ -42,34 +47,23 @@ deleteBook = (e) => {
   axios.delete(deleteQuery)
   .then(response => {
     console.log('delete response',response);
-    this.getBooks();
-    this.render();
-})
-.catch(err => {
-    console.log('error in deleteBook',err);
-    this.setState({error:`Error! (${err.code}: ${err.message})`});
-})
+    const remainingBooks = this.state.books.filter(book => book._id !== e.target.id);
+    this.setState({books:remainingBooks});
+  })
+  .catch(err => {
+      console.log('error in deleteBook',err);
+      this.setState({error:`Error! (${err.code}: ${err.message})`});
+  })
 }
 
-handleAddSubmit = (event) => {
-  // needs to be fat arrow function so state will work????
-  event.preventDefault();
-  this.props.closeModal();
-
-  let newBook = {
-  title: this.state.title,
-  description: this.state.description,
-  status: this.state.status
-  }
-
-  axios.post(`${this.server}/books`, newBook)
-    .then(response => {
-      console.log('post response.data',response.data);
-  });
+handleUpdateButtonClick = (e) => {
+  e.preventDefault();
+  this.setState({buttonClicked: this.state.buttonClicked + 1})
+  this.setState({showUpdateModal:true});
+  this.setState({selectedBook:this.state.books.filter(el => el._id === e.target.id)});
 }
 
   render() {
-
     return (
       <>
         <h2>Our Essential Lifelong Learning &amp; Formation Shelf</h2>
@@ -79,12 +73,14 @@ handleAddSubmit = (event) => {
             {this.state.books.map(el => 
             // per TA Justin: don't try moving <Carousel.Item> to its own component, because it won't work
               <Carousel.Item key={el._id} className='displayBook'>
+                <Button id={el._id} onClick={this.handleUpdateButtonClick}>Update book details</Button>
+                <Button id={el._id} onClick={this.deleteBook}>Remove book from library</Button>
                 <img src="https://place-hold.it/200x200/888" alt="book" />
                 <Carousel.Caption><h2>{el.title}</h2>{el.description}</Carousel.Caption>
-                <Button id={el._id} onClick={this.deleteBook}>Remove from library</Button>
               </Carousel.Item>
             )}
           </Carousel>
+          <BookUpdateModal key={this.state.buttonClicked} showModal={this.state.showUpdateModal} getBooks={this.getBooks} selectedBook={this.state.selectedBook}/>
           </div>
 
         ) : (
