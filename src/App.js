@@ -4,6 +4,7 @@ import Footer from './Footer';
 import BestBooks from './BestBooks';
 import About from './About';
 import BookFormModal from './BookFormModal';
+import Login from './Login';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -38,6 +39,7 @@ class App extends React.Component {
       <>
         <Router>
           <Header />
+          <Login />
           <Routes>
             <Route 
               exact path="/"
